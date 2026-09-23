@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Security: Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://upload.wikimedia.org data:; connect-src https://api.groq.com;" />
+  <!-- SEO & Problem Statement Alignment -->
+  <title>Better Call – AI Legal Assistant for Every Indian Citizen</title>
+  <meta name="description" content="Better Call is a free AI-powered legal platform inspired by Dr. B.R. Ambedkar's vision of justice for all. Get instant answers on Indian law, simplify contracts, find lawyers, and generate legal documents in multiple Indian languages." />
+  <meta name="keywords" content="Indian legal AI, NyAI, legal assistant India, Constitution of India, fundamental rights, RTI application, find lawyer India, legal aid, NALSA, contract analyser India" />
+  <meta name="author" content="Better Call – Legal AI for India" />
+  <meta property="og:title" content="Better Call – AI Legal Assistant for Every Indian Citizen" />
+  <meta property="og:description" content="Free AI legal guidance in 9 Indian languages. Know your rights, simplify contracts, find lawyers." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Accessibility: Skip to main content -->
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-logo">
+      <span class="logo-icon" aria-hidden="true">⚖️</span>
+      <span class="logo-text">Better <span class="gold">Call</span></span>
+    </div>
+    <ul class="nav-links" role="list">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#chatbot">Ask NyAI</a></li>
+      <li><a href="#simplifier">Doc Simplifier</a></li>
+      <li><a href="#analyser">Contract Analyser</a></li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#lawyers">Find Lawyers</a></li>
+      <li><a href="#rights">Know Your Rights</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://www.linkedin.com/in/deeprushil/" target="_blank" rel="noopener noreferrer" class="nav-credit" aria-label="Built by DeepRushil - LinkedIn Profile">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+        <span>Built by DeepRushil</span>
+      </a>
+      <button class="nav-cta" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">Get Legal Help</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main id="main-content">
+  <section class="hero" id="home" aria-labelledby="hero-heading">
+    <div class="hero-content">
+      <div class="hero-badge" aria-hidden="true">⚖️ Inspired by Dr. B.R. Ambedkar's Vision of Justice</div>
+      <h1 class="hero-title" id="hero-heading">Justice Should Be<br/><span class="gold">Accessible to All</span></h1>
+      <p class="hero-sub">AI-powered legal guidance that helps you understand laws, your rights, contracts, and connects you with real lawyers, all in plain language.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})"><i class="fas fa-comments"></i> Ask NyAI</button>
+        <button class="btn-secondary" onclick="document.getElementById('lawyers').scrollIntoView({behavior:'smooth'})"><i class="fas fa-user-tie"></i> Find a Lawyer</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span>50+</span><p>Acts Covered</p></div>
+        <div class="stat"><span>100%</span><p>Free to Use</p></div>
+        <div class="stat"><span>24/7</span><p>AI Available</p></div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <div class="ambedkar-frame">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Dr._Bhimrao_Ambedkar.jpg/330px-Dr._Bhimrao_Ambedkar.jpg" alt="Portrait of Dr. B.R. Ambedkar, chief architect of the Indian Constitution" loading="lazy" width="330" />
+        <div class="quote-card">"Law and order is the medicine of the polity."<br/><small>Dr. B.R. Ambedkar</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSTITUTION BANNER -->
+  <div class="constitution-banner">
+    <div class="banner-inner">
+      <span>📜 Article 21 – Right to Life</span>
+      <span>⚖️ Article 14 – Right to Equality</span>
+      <span>🗣️ Article 19 – Freedom of Speech</span>
+      <span>🔒 Article 32 – Right to Constitutional Remedies</span>
+      <span>📚 Article 15 – No Discrimination</span>
+      <span>✊ Article 17 – Abolition of Untouchability</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>What <span class="gold">Better Call</span> Can Do</h2>
+      <p>Your AI-powered legal companion for every situation</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>Document Simplifier</h3>
+        <p>Upload contracts, agreements, or legal notices and get plain language summaries highlighting key risks and obligations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <h3>Know Your Rights</h3>
+        <p>Ask about any Indian law, constitutional article, IPC section, or fundamental right and get clear explanations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Contract Analyser</h3>
+        <p>Compare two contracts side by side. Find inconsistencies, hidden clauses, and get a risk score.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Find Lawyers</h3>
+        <p>Search verified lawyers by city, specialization, and language. Get contact details instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Checklists & Templates</h3>
+        <p>Generate legal checklists, FIR drafts, RTI applications, and notice templates in minutes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Multilingual Support</h3>
+        <p>Get legal help in Hindi, Tamil, Telugu, Bengali, Marathi, and more regional languages.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHATBOT SECTION -->
+  <section class="chatbot-section" id="chatbot">
+    <div class="section-header">
+      <h2>Ask <span class="gold">NyAI</span></h2>
+      <p>Get instant answers on Indian law, articles, and your rights</p>
+    </div>
+    <div class="chat-container">
+      <div class="lang-bar">
+        <span class="lang-label">Language:</span>
+        <button class="lang-btn active" onclick="setLang('English', this)">English</button>
+        <button class="lang-btn" onclick="setLang('Hindi', this)">हिंदी</button>
+        <button class="lang-btn" onclick="setLang('Tamil', this)">தமிழ்</button>
+        <button class="lang-btn" onclick="setLang('Telugu', this)">తెలుగు</button>
+        <button class="lang-btn" onclick="setLang('Bengali', this)">বাংলা</button>
+        <button class="lang-btn" onclick="setLang('Marathi', this)">मराठी</button>
+        <button class="lang-btn" onclick="setLang('Gujarati', this)">ગુજરાતી</button>
+        <button class="lang-btn" onclick="setLang('Kannada', this)">ಕನ್ನಡ</button>
+        <button class="lang-btn" onclick="setLang('Malayalam', this)">മലയാളം</button>
+      </div>
+      <div class="chat-window" id="chatWindow" role="log" aria-live="polite" aria-label="NyAI conversation" data-testid="chat-window">
+        <div class="chat-msg bot">
+          <div class="avatar">⚖️</div>
+          <div class="bubble">
+            <strong>NyAI</strong><br/>
+            Namaste! 🙏 I'm your AI legal assistant, inspired by the vision of Dr. B.R. Ambedkar, that every Indian deserves access to justice.<br/><br/>
+            I can help you with:
+            <ul>
+              <li>Understanding Indian laws & Constitutional articles</li>
+              <li>Explaining your rights in a given situation</li>
+              <li>Summarising legal documents</li>
+              <li>Drafting legal notices or RTI applications</li>
+              <li>Finding the right lawyer for your case</li>
+            </ul>
+            What legal question can I help you with today?
+          </div>
+        </div>
+      </div>
+      <div class="quick-prompts">
+        <button onclick="sendQuick('What are my rights if I am arrested?')">🔒 Arrested Rights</button>
+        <button onclick="sendQuick('Explain Article 21 of the Constitution')">📜 Article 21</button>
+        <button onclick="sendQuick('How do I file an RTI application?')">📋 File RTI</button>
+        <button onclick="sendQuick('What is the IPC section for cheating?')">⚖️ IPC Sections</button>
+        <button onclick="sendQuick('How to draft a legal notice?')">📄 Legal Notice</button>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput"
+          placeholder="Ask any Indian legal question in any language..."
+          aria-label="Type your legal question for NyAI"
+          maxlength="2000"
+          data-testid="chat-input"
+          onkeydown="if(event.key==='Enter') sendMessage()"/>
+        <button onclick="sendMessage()" aria-label="Send message to NyAI" data-testid="send-btn">
+          <i class="fas fa-paper-plane" aria-hidden="true"></i>
+        </button>
+      </div>
+      <p class="disclaimer">⚠️ NyAI provides legal information, not legal advice. Always consult a licensed lawyer for professional counsel.</p>
+    </div>
+  </section>
+
+  <!-- DOCUMENT SIMPLIFIER -->
+  <section class="tool-section" id="simplifier">
+    <div class="section-header">
+      <h2>Document <span class="gold">Simplifier</span></h2>
+      <p>Paste or upload any contract, agreement, or legal notice and get a plain language summary</p>
+    </div>
+    <div class="tool-box">
+      <div class="tool-tabs">
+        <button class="tool-tab active" onclick="switchTab('paste-tab','simplifier')">Paste Text</button>
+        <button class="tool-tab" onclick="switchTab('upload-tab','simplifier')">Upload .txt File</button>
+      </div>
+      <div id="paste-tab">
+        <textarea class="tool-textarea" id="simplifierText" placeholder="Paste your contract, legal notice, or agreement text here..."></textarea>
+      </div>
+      <div id="upload-tab" style="display:none">
+        <div class="tool-upload-area" onclick="document.getElementById('simplifierFile').click()">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click to upload a .txt file</p>
+          <p style="margin-top:0.3rem;font-size:0.75rem">Supports .txt files only (PDF: copy-paste the text)</p>
+          <input type="file" id="simplifierFile" accept=".txt" onchange="readFile(this,'simplifierText','paste-tab','upload-tab')"/>
+        </div>
+      </div>
+      <button class="tool-run-btn" onclick="runSimplifier()"><i class="fas fa-magic"></i> Simplify Document</button>
+      <div class="tool-output" id="simplifierOutput">
+        <div class="tool-output-label">Plain Language Summary <button class="copy-btn" onclick="copyOutput('simplifierResult')"><i class="fas fa-copy"></i> Copy</button></div>
+        <div class="tool-output-box" id="simplifierResult"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTRACT ANALYSER -->
+  <section class="tool-section" id="analyser">
+    <div class="section-header">
+      <h2>Contract <span class="gold">Analyser</span></h2>
+      <p>Compare two contracts side by side and get a risk assessment with hidden clause detection</p>
+    </div>
+    <div class="tool-box">
+      <div class="contract-cols">
+        <div class="contract-col">
+          <label><i class="fas fa-file-alt"></i> Contract A</label>
+          <textarea class="tool-textarea" id="contractA" placeholder="Paste Contract A text here..."></textarea>
+        </div>
+        <div class="contract-col">
+          <label><i class="fas fa-file-alt"></i> Contract B (optional for comparison)</label>
+          <textarea class="tool-textarea" id="contractB" placeholder="Paste Contract B text here for comparison (optional)..."></textarea>
+        </div>
+      </div>
+      <button class="tool-run-btn" onclick="runAnalyser()"><i class="fas fa-search"></i> Analyse Contracts</button>
+      <div class="tool-output" id="analyserOutput">
+        <div class="tool-output-label">Risk Assessment <button class="copy-btn" onclick="copyOutput('analyserResult')"><i class="fas fa-copy"></i> Copy</button></div>
+        <div id="analyserResult" class="tool-output-box"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLISTS & TEMPLATES -->
+  <section class="tool-section" id="templates">
+    <div class="section-header">
+      <h2>Checklists <span class="gold">&amp; Templates</span></h2>
+      <p>Generate ready-to-use legal documents, FIR drafts, RTI applications and more in minutes</p>
+    </div>
+    <div class="tool-box">
+      <div class="template-selector">
+        <select class="template-select-input" id="templateType">
+          <option value="">Select Template Type</option>
+          <optgroup label="Applications">
+            <option value="RTI Application">RTI Application</option>
+            <option value="Bail Application">Bail Application</option>
+            <option value="Consumer Complaint">Consumer Complaint</option>
+            <option value="NALSA Free Legal Aid Application">NALSA Free Legal Aid Application</option>
+          </optgroup>
+          <optgroup label="Notices">
+            <option value="Legal Notice">Legal Notice</option>
+            <option value="Demand Notice">Demand Notice (Money Recovery)</option>
+            <option value="Eviction Notice">Eviction Notice</option>
+            <option value="Cease and Desist Notice">Cease and Desist Notice</option>
+          </optgroup>
+          <optgroup label="Drafts">
+            <option value="FIR Draft">FIR Draft</option>
+            <option value="Complaint to Police">Complaint to Police</option>
+            <option value="Affidavit">Affidavit</option>
+          </optgroup>
+          <optgroup label="Checklists">
+            <option value="Property Purchase Checklist">Property Purchase Checklist</option>
+            <option value="Employment Contract Checklist">Employment Contract Checklist</option>
+            <option value="Court Hearing Checklist">Court Hearing Checklist</option>
+          </optgroup>
+        </select>
+        <select class="template-select-input" id="templateLang">
+          <option value="English">English</option>
+          <option value="Hindi">Hindi</option>
+          <option value="Marathi">Marathi</option>
+          <option value="Tamil">Tamil</option>
+          <option value="Telugu">Telugu</option>
+          <option value="Bengali">Bengali</option>
+          <option value="Gujarati">Gujarati</option>
+        </select>
+      </div>
+      <textarea class="tool-textarea" id="templateDetails" placeholder="Add specific details (e.g. your name, opponent's name, incident date, amount involved, brief description)..." style="min-height:120px"></textarea>
+      <button class="tool-run-btn" onclick="runTemplate()"><i class="fas fa-file-download"></i> Generate Template</button>
+      <div class="tool-output" id="templateOutput">
+        <div class="tool-output-label">Generated Document <button class="copy-btn" onclick="copyOutput('templateResult')"><i class="fas fa-copy"></i> Copy</button></div>
+        <div class="tool-output-box" id="templateResult"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAWYERS SECTION -->
+  <section class="lawyers-section" id="lawyers">
+    <div class="section-header">
+      <h2>Find a <span class="gold">Lawyer</span></h2>
+      <p>Search verified legal professionals across India</p>
+    </div>
+    <div class="lawyer-search">
+      <select id="lawyerState">
+        <option value="">All States / UTs</option>
+        <optgroup label="States">
+          <option>Andhra Pradesh</option>
+          <option>Arunachal Pradesh</option>
+          <option>Assam</option>
+          <option>Bihar</option>
+          <option>Chhattisgarh</option>
+          <option>Goa</option>
+          <option>Gujarat</option>
+          <option>Haryana</option>
+          <option>Himachal Pradesh</option>
+          <option>Jharkhand</option>
+          <option>Karnataka</option>
+          <option>Kerala</option>
+          <option>Madhya Pradesh</option>
+          <option>Maharashtra</option>
+          <option>Manipur</option>
+          <option>Meghalaya</option>
+          <option>Mizoram</option>
+          <option>Nagaland</option>
+          <option>Odisha</option>
+          <option>Punjab</option>
+          <option>Rajasthan</option>
+          <option>Sikkim</option>
+          <option>Tamil Nadu</option>
+          <option>Telangana</option>
+          <option>Tripura</option>
+          <option>Uttar Pradesh</option>
+          <option>Uttarakhand</option>
+          <option>West Bengal</option>
+        </optgroup>
+        <optgroup label="Union Territories">
+          <option>Andaman and Nicobar Islands</option>
+          <option>Chandigarh</option>
+          <option>Dadra and Nagar Haveli and Daman and Diu</option>
+          <option>Delhi (NCT)</option>
+          <option>Jammu and Kashmir</option>
+          <option>Ladakh</option>
+          <option>Lakshadweep</option>
+          <option>Puducherry</option>
+        </optgroup>
+      </select>
+      <select id="lawyerSpec">
+        <option value="">All Specializations</option>
+        <option>Criminal Law</option>
+        <option>Family Law</option>
+        <option>Corporate Law</option>
+        <option>Consumer Rights</option>
+        <option>Labour Law</option>
+        <option>Property Law</option>
+        <option>Cyber Law</option>
+        <option>Constitutional Law</option>
+      </select>
+      <button onclick="searchLawyers()"><i class="fas fa-search"></i> Search</button>
+    </div>
+    <div class="lawyer-grid" id="lawyerGrid"></div>
+  </section>
+
+  <!-- RIGHTS SECTION -->
+  <section class="rights-section" id="rights">
+    <div class="section-header">
+      <h2>Know Your <span class="gold">Fundamental Rights</span></h2>
+      <p>Your rights guaranteed by the Constitution of India</p>
+    </div>
+    <div class="rights-grid">
+      <div class="right-card" onclick="expandRight(this)">
+        <div class="right-num">Art. 14</div>
+        <h3>Right to Equality</h3>
+        <p>The State shall not deny any person equality before the law or equal protection of laws within India.</p>
+        <div class="right-detail hidden">This includes equality of opportunity in public employment, abolition of titles, and protection against discrimination on grounds of religion, race, caste, sex, or place of birth (Articles 14–18).</div>
+      </div>
+      <div class="right-card" onclick="expandRight(this)">
+        <div class="right-num">Art. 17</div>
+        <h3>Abolition of Untouchability</h3>
+        <p>Untouchability is abolished and its practice in any form is forbidden. Enforcement of any disability arising out of untouchability is an offence.</p>
+        <div class="right-detail hidden">The Protection of Civil Rights Act, 1955 and the SC/ST (Prevention of Atrocities) Act, 1989 give legal force to this article.</div>
+      </div>
+      <div class="right-card" onclick="expandRight(this)">
+        <div class="right-num">Art. 19</div>
+        <h3>Freedom of Speech</h3>
+        <p>All citizens have the right to freedom of speech, expression, assembly, movement, residence, and profession.</p>
+        <div class="right-detail hidden">These freedoms are subject to reasonable restrictions in the interest of sovereignty, security, public order, decency, or morality of India.</div>
+      </div>
+      <div class="right-card" onclick="expandRight(this)">
+        <div class="right-num">Art. 21</div>
+        <h3>Right to Life & Liberty</h3>
+        <p>No person shall be deprived of life or personal liberty except according to procedure established by law.</p>
+        <div class="right-detail hidden">The Supreme Court has expanded this to include right to livelihood, health, education, privacy, speedy trial, and a dignified life.</div>
+      </div>
+      <div class="right-card" onclick="expandRight(this)">
+        <div class="right-num">Art. 32</div>
+        <h3>Right to Constitutional Remedies</h3>
+        <p>Every citizen has the right to move the Supreme Court for enforcement of their Fundamental Rights.</p>
+        <div class="right-detail hidden">Dr. Ambedkar called this "the heart and soul of the Constitution." Writs like Habeas Corpus, Mandamus, and Certiorari are tools citizens can use.</div>
+      </div>
+      <div class="right-card" onclick="expandRight(this)">
+        <div class="right-num">Art. 21A</div>
+        <h3>Right to Education</h3>
+        <p>The State shall provide free and compulsory education to all children of 6–14 years of age.</p>
+        <div class="right-detail hidden">Enforced through the Right of Children to Free and Compulsory Education (RTE) Act, 2009.</div>
+      </div>
+    </div>
+  </section>
+
+  </main><!-- end #main-content -->
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="logo-icon" aria-hidden="true">⚖️</span>
+        <span class="logo-text">Better <span class="gold">Call</span></span>
+        <p>Making legal knowledge accessible to every Indian citizen.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#chatbot">Ask NyAI</a>
+        <a href="#simplifier">Doc Simplifier</a>
+        <a href="#analyser">Contract Analyser</a>
+        <a href="#templates">Templates</a>
+        <a href="#lawyers">Find Lawyers</a>
+        <a href="#rights">Fundamental Rights</a>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <a href="https://www.india.gov.in" target="_blank" rel="noopener noreferrer">India.gov.in</a>
+        <a href="https://main.sci.gov.in" target="_blank" rel="noopener noreferrer">Supreme Court of India</a>
+        <a href="https://nalsa.gov.in" target="_blank" rel="noopener noreferrer">NALSA – Free Legal Aid</a>
+        <a href="https://rti.india.gov.in" target="_blank" rel="noopener noreferrer">RTI Online Portal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>🙏 Dedicated to Dr. B.R. Ambedkar, Architect of the Indian Constitution &nbsp;|&nbsp; Better Call is for informational purposes only.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

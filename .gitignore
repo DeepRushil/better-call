@@ -1,0 +1,10 @@
+# Never commit API keys or secrets
+.env
+*.env
+config.js
+secrets.js
+api-key.txt
+
+# OS files
+.DS_Store
+Thumbs.db
