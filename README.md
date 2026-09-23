@@ -1,68 +1,84 @@
-# Better Call – AI Legal Assistant for Every Indian Citizen
+# Justice Should Be Accessible to All — Better Call ⚖️
 
-> Inspired by Dr. B.R. Ambedkar's vision: **"Justice should be accessible to all."**
+> *"Law and order is the medicine of the body politic and when the body politic falls sick, medicine must be administered."*  
+> — **Dr. B.R. Ambedkar**, Architect of the Constitution of India
 
-## Problem Statement
+🌐 **Live Application:** [https://better-call-eosin.vercel.app/](https://better-call-eosin.vercel.app/)  
+👨‍💻 **Created by:** [DeepRushil](https://www.linkedin.com/in/deeprushil/)
 
-Legal knowledge in India is inaccessible to most citizens due to complex language, high lawyer fees, and lack of awareness. Better Call uses Generative AI to bridge this gap, providing instant, plain-language legal guidance in 9 Indian languages at zero cost.
+---
 
-## Features
+## Why Better Call?
 
-| Feature | Description |
-|---|---|
-| **NyAI Chatbot** | AI legal assistant powered by Groq. Answers questions on Indian Constitution, IPC/BNS, CrPC, fundamental rights in 9 languages |
-| **Document Simplifier** | Paste or upload any contract/legal notice; get plain language summary, obligations, red flags, and risk verdict |
-| **Contract Analyser** | Analyse a single contract or compare two contracts with risk score and negotiation points |
-| **Checklists & Templates** | Generate 15+ legal documents (FIR drafts, RTI applications, legal notices, affidavits) in 7 Indian languages |
-| **Find a Lawyer** | Official state Bar Council links for all 36 states/UTs + NALSA free legal aid + Nyaya Bandhu pro bono |
-| **Know Your Rights** | Interactive cards on key Constitutional articles (Art. 14, 17, 19, 21, 21A, 32) |
-| **Multilingual Support** | Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam |
+In India, the law protects every citizen equally on paper. In practice, however, navigating legal hurdles is often daunting, costly, and shrouded in complex legal jargon. Millions of people struggle to understand their basic constitutional rights, can't afford legal counsel, or simply don't know where to turn when facing an issue.
 
-## Tech Stack
+**Better Call** is built to bridge that gap. 
 
-- **Frontend**: Pure HTML5, CSS3, Vanilla JavaScript (no frameworks, no build tools)
-- **AI**: Groq API with OpenAI-compatible interface
-- **Legal Data**: Official Indian government sources (Bar Council, NALSA, RTI Portal)
+Designed with empathy and simplicity at its core, Better Call acts as a 24/7 personal legal guide for everyday citizens, tenants, workers, small business owners, and students across India. It breaks down legal barriers into plain, everyday language and connects people with real, verified government legal aid resources.
 
-## Security Measures
+---
 
-- Content Security Policy (CSP) meta tag restricts resource origins
-- XSS prevention: all AI-generated content is HTML-escaped before DOM insertion
-- Client-side rate limiting (10 requests/minute) to prevent API abuse
-- All external links use `rel="noopener noreferrer"` to prevent tab hijacking
-- Input length validation on all user-facing fields
+## What Can You Do With Better Call?
 
-## Accessibility
+### 💬 NyAI Legal Assistant
+An intelligent conversational companion powered by Groq. Whether you're curious about your rights during a police stop, wondering how to challenge an unfair penalty, or seeking clarity on fundamental rights, NyAI answers with empathy, citations to relevant acts (Constitution, IPC/BNS, CrPC), and practical steps.
 
-- WCAG 2.1 informed: skip navigation, `aria-live` regions, `role` attributes
-- Full keyboard navigation with visible focus outlines
-- Screen reader support: `aria-label`, `aria-busy`, `role="log"` on chat window
-- `prefers-reduced-motion` and `prefers-contrast` media query support
-- Semantic HTML5 landmarks: `<main>`, `<nav>`, `<footer>`, `<section>`
-- `loading="lazy"` on images, `maxlength` on inputs
+### 🌐 Speaks Your Language (Multilingual Support)
+Legal help shouldn't be restricted to English. Better Call supports queries in **Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, and English**, ensuring legal knowledge reaches every corner of the country.
 
-## Code Quality
+### 📄 Document Simplifier
+Contracts and legal notices can be intentionally confusing. Paste or upload any agreement, and Better Call highlights:
+- A plain-language summary of what the document actually means
+- Your key responsibilities and obligations
+- Critical deadlines and dates
+- Potential traps, unfair clauses, and red flags
 
-- JSDoc comments on every function
-- Single `groqCall()` abstraction handles all AI API calls
-- Constants extracted at top of file (`GROQ_MODEL`, `MAX_INPUT_CHARS`, etc.)
-- DOM elements cached at startup to avoid repeated `getElementById` calls
-- No `alert()` calls — inline error messages used instead
+### 🔍 Contract Analyser & Comparison
+Compare two versions of an agreement side by side or scan a single contract for hidden liabilities. Receive a risk rating (Low / Medium / High) and concrete points to negotiate before signing.
 
-## Target Users
+### 📋 Ready-to-Use Legal Templates & Checklists
+Generate formatted legal documents in minutes with simple fill-in-the-blank placeholders:
+- **RTI Applications** to hold public offices accountable
+- **FIR & Police Complaint Drafts**
+- **Consumer Forum Complaints**
+- **Legal Notices** (e.g., unpaid dues, eviction, cease-and-desist)
+- **Checklists** for buying property or signing employment contracts
 
-1. Citizens who cannot afford legal consultation
-2. First-generation rights seekers in rural/semi-urban areas
-3. Workers facing labour disputes or wrongful termination
-4. Women seeking protection under POCSO, Domestic Violence Act, etc.
-5. SC/ST communities seeking NALSA free legal aid
-6. Small business owners needing contract guidance
+### 🤝 Real Lawyer Directory & Free Legal Aid
+Better Call doesn't replace licensed attorneys for serious court battles. Instead, it directs you straight to:
+- **Official State Bar Council Portals** across all 36 States & Union Territories to verify advocate credentials
+- **NALSA (National Legal Services Authority)** for eligible free legal aid (Toll-Free: `15100`)
+- **Nyaya Bandhu (Department of Justice)** for pro bono legal assistance
 
-## Running Locally
+---
 
-Simply open `index.html` in any modern browser. No installation required.
+## Engineering & Security Highlights
 
-## Hackathon
+- **Serverless API Proxy:** Architecture utilizes secure serverless functions (`api/chat.js`) so that credentials and API keys are never exposed to the client or browser network tools.
+- **XSS & Injection Protection:** All AI responses pass through HTML entity sanitization prior to DOM rendering.
+- **Client-Side Guardrails:** Integrated rate limiting and payload validation prevent runaway requests.
+- **Accessibility (a11y) First:** Includes skip navigation, ARIA landmarks, live screen reader regions, keyboard navigation highlights, and respect for `prefers-reduced-motion`.
+- **Zero Build Friction:** Built with clean, vanilla HTML5, modern CSS3, and JavaScript—fast load times, lightweight footprint, and zero dependency bloat.
 
-Built for: **GenAI for Legal Assistance & Access (India)**
-Problem: Making justice accessible to every Indian citizen through AI
+---
+
+## Getting Started Locally
+
+No complex dependencies or build steps required.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/DeepRushil/better-call.git
+   cd better-call
+   ```
+2. Open `index.html` directly in any web browser, or serve it with any static server:
+   ```bash
+   npx serve .
+   ```
+
+---
+
+## Dedicated to Equal Justice
+
+Built for the **GenAI for Legal Assistance & Access Hackathon**.  
+*Disclaimer: Better Call provides general legal information and awareness. For specific litigation or court proceedings, always consult a licensed advocate.*
