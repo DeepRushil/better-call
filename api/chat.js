@@ -1,33 +1,45 @@
-// Vercel Serverless Function — secure API proxy for Groq
-// The GROQ_API_KEY is stored in Vercel's environment variables (never in code)
+// Vercel Serverless Function — secure Groq API proxy
+// GROQ_API_KEY is stored in Vercel Environment Variables only
 module.exports = async function handler(req, res) {
-  // Only allow POST requests
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
-  }
+
+  // Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Method Not Allowed" });
 
   const apiKey = process.env.GROQ_API_KEY;
-
   if (!apiKey) {
-    console.error("[NyAI] GROQ_API_KEY is not set in environment variables.");
+    console.error("[NyAI] GROQ_API_KEY environment variable is not set.");
     return res.status(500).json({ error: "Server configuration error: API key missing." });
   }
 
+  // Safely parse the request body
+  let body = req.body;
+  if (typeof body === "string") {
+    try { body = JSON.parse(body); } catch { return res.status(400).json({ error: "Invalid JSON." }); }
+  }
+  if (!body || !body.messages) {
+    return res.status(400).json({ error: "Request body must contain a messages array." });
+  }
+
   try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + apiKey
       },
-      body: JSON.stringify(req.body)
+      body: JSON.stringify(body)
     });
 
-    const data = await response.json();
-    return res.status(response.status).json(data);
+    const data = await groqRes.json();
+    return res.status(groqRes.status).json(data);
 
-  } catch (error) {
-    console.error("[NyAI] Groq API call failed:", error.message);
-    return res.status(500).json({ error: "Failed to reach Groq API: " + error.message });
+  } catch (err) {
+    console.error("[NyAI] Groq fetch failed:", err.message);
+    return res.status(500).json({ error: "Groq API unreachable: " + err.message });
   }
 };
