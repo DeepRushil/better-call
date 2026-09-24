@@ -12,6 +12,7 @@
   "scripts": {
     "test": "jest --verbose",
     "test:coverage": "jest --coverage --verbose",
+    "test:ci": "jest --ci --coverage",
     "test:watch": "jest --watch"
   },
   "devDependencies": {

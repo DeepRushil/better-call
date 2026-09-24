@@ -104,21 +104,47 @@ const SYSTEM_PROMPT = "You are NyAI, an AI legal assistant for Indian citizens, 
 "Tone: Helpful, empathetic, clear. Not robotic. Not over-formal.";
 
 // ============================================================
+// RESPONSE CACHE (Efficiency - Instant responses & 0 token cost for repeat queries)
+// ============================================================
+const responseCache = new Map();
+const MAX_CACHE_SIZE = 50;
+
+function getCachedResponse(key) {
+  return responseCache.get(key);
+}
+
+function setCachedResponse(key, value) {
+  if (responseCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = responseCache.keys().next().value;
+    responseCache.delete(firstKey);
+  }
+  responseCache.set(key, value);
+}
+
+// ============================================================
 // CORE API CALL (Single source of truth for all Groq calls)
 // ============================================================
 /**
  * Sends a request to the Groq API.
- * Enforces rate limiting, input validation, and error handling.
+ * Enforces in-memory caching, rate limiting, input validation, and error handling.
  * @param {string} systemPrompt - AI instruction context
  * @param {string} userMessage  - User input text
  * @returns {Promise<string>} AI response or descriptive error message
  */
 async function groqCall(systemPrompt, userMessage) {
+  const safeSystem = systemPrompt.slice(0, MAX_INPUT_CHARS);
+  const safeUser   = userMessage.slice(0, MAX_INPUT_CHARS);
+  const cacheKey   = safeSystem + ":::" + safeUser;
+
+  // Check cache first for 0ms latency and 0 API calls
+  const cached = getCachedResponse(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
   if (!rateLimiter.check()) {
     return "You have made too many requests. Please wait a minute before trying again.";
   }
-  const safeSystem = systemPrompt.slice(0, MAX_INPUT_CHARS);
-  const safeUser   = userMessage.slice(0, MAX_INPUT_CHARS);
 
   try {
     const res = await fetch(GROQ_ENDPOINT, {
@@ -146,9 +172,14 @@ async function groqCall(systemPrompt, userMessage) {
     }
 
     const data = await res.json();
-    return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
+    const result = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
       ? data.choices[0].message.content.trim()
       : "Sorry, no response was generated. Please try again.";
+
+    if (result && !result.startsWith("Sorry,")) {
+      setCachedResponse(cacheKey, result);
+    }
+    return result;
 
   } catch (networkErr) {
     console.error("[NyAI] Network error:", networkErr.message);

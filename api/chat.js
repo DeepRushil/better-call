@@ -1,11 +1,16 @@
 // Vercel Serverless Function — secure Groq API proxy
 // GROQ_API_KEY is stored in Vercel Environment Variables only — never in source code.
+
+const MAX_PAYLOAD_BYTES = 50 * 1024; // 50 KB ceiling to prevent Denial of Service
+
 module.exports = async function handler(req, res) {
 
   // Security headers on every response
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -28,12 +33,17 @@ module.exports = async function handler(req, res) {
   // Safely parse the request body (supports both parsed object and raw JSON string)
   let body = req.body;
   if (typeof body === "string") {
+    if (body.length > MAX_PAYLOAD_BYTES) {
+      return res.status(413).json({ error: "Payload Too Large: Maximum allowed size is 50 KB." });
+    }
     try { body = JSON.parse(body); }
     catch { return res.status(400).json({ error: "Invalid JSON body." }); }
+  } else if (body && JSON.stringify(body).length > MAX_PAYLOAD_BYTES) {
+    return res.status(413).json({ error: "Payload Too Large: Maximum allowed size is 50 KB." });
   }
 
   // Validate that messages array is present
-  if (!body || !body.messages) {
+  if (!body || !body.messages || !Array.isArray(body.messages)) {
     return res.status(400).json({ error: "Request body must contain a messages array." });
   }
 

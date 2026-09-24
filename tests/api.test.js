@@ -188,4 +188,41 @@ describe("Security headers", () => {
     await handler(req, res);
     expect(res._headers["X-Frame-Options"]).toBe("DENY");
   });
+
+  test("sets Strict-Transport-Security header", async () => {
+    const req = { method: "POST", body: { messages: [] } };
+    const res = mockRes();
+    await handler(req, res);
+    expect(res._headers["Strict-Transport-Security"]).toContain("max-age=");
+  });
+
+  test("sets Referrer-Policy and Permissions-Policy headers", async () => {
+    const req = { method: "POST", body: { messages: [] } };
+    const res = mockRes();
+    await handler(req, res);
+    expect(res._headers["Referrer-Policy"]).toBe("strict-origin-when-cross-origin");
+    expect(res._headers["Permissions-Policy"]).toContain("camera=()");
+  });
+});
+
+// ============================================================
+// Payload Guard & DoS Protection
+// ============================================================
+describe("Payload Guard & DoS Protection", () => {
+  test("returns 413 if string payload exceeds 50 KB", async () => {
+    const hugeString = "a".repeat(51 * 1024);
+    const req = { method: "POST", body: hugeString };
+    const res = mockRes();
+    await handler(req, res);
+    expect(res._status).toBe(413);
+    expect(res._body.error).toMatch(/Payload Too Large/i);
+  });
+
+  test("returns 400 if messages is not an array", async () => {
+    const req = { method: "POST", body: { messages: "not an array" } };
+    const res = mockRes();
+    await handler(req, res);
+    expect(res._status).toBe(400);
+    expect(res._body.error).toMatch(/messages array/i);
+  });
 });
