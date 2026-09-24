@@ -276,16 +276,22 @@ function removeTyping() {
  * Switches between paste/upload tabs in the Document Simplifier.
  * @param {string} tabId - ID of the tab panel to show
  */
-function switchTab(tabId) {
+function switchTab(tabId, sectionId, btn) {
   ["paste-tab", "upload-tab"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = "none";
   });
   const target = document.getElementById(tabId);
   if (target) target.style.display = "block";
-  const tabs = document.querySelectorAll("#simplifier .tool-tab");
+  const container = sectionId ? document.getElementById(sectionId) : document.getElementById("simplifier");
+  const tabs = (container || document).querySelectorAll(".tool-tab");
   tabs.forEach(t => t.classList.remove("active"));
-  if (event && event.target) event.target.classList.add("active");
+  if (btn) {
+    btn.classList.add("active");
+  } else if (typeof window !== "undefined" && window.event && window.event.target) {
+    const targetBtn = window.event.target.closest ? window.event.target.closest(".tool-tab") : window.event.target;
+    if (targetBtn) targetBtn.classList.add("active");
+  }
 }
 
 /**
