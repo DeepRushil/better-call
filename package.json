@@ -1,0 +1,29 @@
+{
+  "name": "better-call",
+  "version": "1.0.0",
+  "description": "AI-powered legal assistant for Indian citizens — inspired by Dr. B.R. Ambedkar's vision of justice for all.",
+  "author": "DeepRushil <deeprushil18@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://better-call-eosin.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeepRushil/better-call.git"
+  },
+  "scripts": {
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage --verbose",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"],
+    "collectCoverageFrom": ["src/**/*.js", "api/**/*.js"],
+    "coverageReporters": ["text", "lcov"]
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
