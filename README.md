@@ -6,145 +6,132 @@
 🌐 **Live Application:** [https://better-call-eosin.vercel.app/](https://better-call-eosin.vercel.app/)  
 👨‍💻 **Created by:** [DeepRushil](https://www.linkedin.com/in/deeprushil/)  
 🛡️ **Security Policy:** [SECURITY.md](SECURITY.md)  
-🧪 **Test Suite:** 57/57 Passed (97.5% Coverage) • CI/CD Verified via GitHub Actions
+🧪 **Test Suite:** 70/70 Passed (97.5% Coverage) • Automated Unit & Integration Tests
 
 ---
 
-## The Challenge
+## Problem Statement
 
-In India, equal access to justice is a constitutional promise, but a severe reality gap persists:
+Equal justice under the law is guaranteed by Article 39A of the Constitution of India, yet millions of Indian citizens remain effectively excluded from the justice system. The root challenge is not an absence of legal protections, but an acute **accessibility and comprehension barrier** composed of four structural obstacles:
 
-1. **The Language Barrier:** Laws and court orders are primarily authored in formal English and dense legalese, rendering them indecipherable to over 90% of citizens who communicate primarily in regional languages.
-2. **Economic Disparity:** Professional legal consultation fees can exceed a daily-wage worker's entire monthly income, discouraging people from seeking redress.
-3. **Information Asymmetry:** Most citizens are unaware of their fundamental rights during arrests, consumer disputes, tenant eviction, or wage theft, leaving them vulnerable to exploitation.
-4. **Procedural Intimidation:** Drafting basic legal filings—such as an RTI query, an FIR, or an official notice—requires technical formatting knowledge that common citizens lack.
+1. **The Vernacular Language Barrier:** Over 90% of Indian citizens communicate primarily in regional languages (Hindi, Tamil, Telugu, Bengali, Marathi, etc.), whereas statutes, High Court precedents, and contractual agreements are predominantly authored in formal English and dense legalese.
+2. **Prohibitive Economic Costs:** Professional advocate consultation fees can exceed a median worker's monthly wages, creating severe financial barriers for citizens seeking initial advice or dispute guidance.
+3. **Information Asymmetry:** Most citizens do not know their basic rights during common civil and criminal events—such as police detention, unlawful eviction, consumer fraud, wage withholding, or bail procedures.
+4. **Procedural Complexity:** Drafting simple legal communications—such as an RTI inquiry, an FIR, a consumer grievance, or a recovery notice—demands rigid procedural formatting that common citizens cannot navigate without paid intervention.
 
-**Better Call** is an open, free, and accessible AI platform built to dismantle these barriers. It translates complex Indian statutes into plain, conversational explanations, provides automated document drafting, and connects citizens directly with verified free legal aid.
+**Better Call** solves this root challenge by providing a free, instant, and privacy-preserving legal intelligence companion that translates complex Indian laws into plain, actionable advice in 9 regional languages, automates citizen document drafts, and connects users directly with verified free legal aid.
+
+---
+
+## Core Objectives
+
+* **Democratize Legal Awareness:** Translate complex statutory provisions (Constitution, IPC/BNS, CrPC/BNSS) into clear, conversational language.
+* **Eliminate Language Exclusivity:** Ensure non-English speakers have native legal access across 9 official Indian languages.
+* **Empower Self-Advocacy:** Provide structured document simplifiers and contract auditors that allow citizens to identify predatory clauses before signing agreements.
+* **Bridge to Institutional Aid:** Eliminate unauthorized intermediary exploitation by directly routing citizens to verified State Bar Councils, NALSA (`15100`), and Nyaya Bandhu pro bono services.
+
+---
+
+## Target Users & Beneficiaries
+
+1. **Economically Vulnerable Citizens:** Individuals and families below the poverty line who qualify for free legal aid under NALSA but lack information on how to claim it.
+2. **Vernacular & Regional Language Speakers:** Citizens in rural, tier-2, and tier-3 communities who require legal guidance in their native mother tongue.
+3. **Gig Workers, Laborers & Employees:** Workers facing wage delays, wrongful termination, or hazardous workplace conditions seeking immediate notice drafting.
+4. **Tenants & Consumers:** Renters and shoppers facing security deposit forfeiture, illegal lockouts, or defective service disputes.
+5. **Women & Marginalized Communities:** Individuals seeking immediate statutory awareness under special welfare legislations (Domestic Violence Act, POCSO, Equal Remuneration Act).
+6. **Micro & Small Business Owners (MSMEs):** Entrepreneurs needing quick contract risk analysis and negotiation guidance before signing vendor agreements.
+
+---
+
+## Solution Alignment Matrix
+
+| Root Challenge | Better Call Solution | Citizen Impact |
+|---|---|---|
+| **English Monopolization** | Multilingual Engine (9 Languages) | Citizens ask questions and read responses in Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, or English. |
+| **Complex Legal Jargon** | Document Simplifier Tool | Converts dense contracts or eviction notices into plain bullet points of obligations, rights, and red flags. |
+| **Predatory Contract Terms** | Contract Analyser & Comparator | Identifies hidden clauses, provides an objective Risk Score (Low/Medium/High), and suggests negotiation terms. |
+| **Inaccessible Legal Drafting** | Legal Templates & Checklists | Auto-generates ready-to-use RTI applications, FIR drafts, consumer complaints, and legal notices with fillable brackets (`[NAME]`). |
+| **Unverified Representation** | Verified Lawyer Directory | Maps all 36 States & UTs to official Bar Council registries and toll-free NALSA free legal aid (`15100`). |
+| **Ignorance of Basic Rights** | Fundamental Rights Module | Interactive cards demystifying Articles 14, 19, 21, 21A, and 32 with landmark constitutional precedents. |
 
 ---
 
 ## System Architecture
 
-Better Call is designed with a defense-in-depth model that prioritizes citizen privacy, data isolation, and low-latency responses:
+Better Call utilizes a zero-trust, serverless proxy architecture that guarantees citizen privacy and zero client-side credential exposure:
 
 ```mermaid
 flowchart TD
-    User["Citizen Browser / Mobile Client"]
-    Cache["In-Memory LRU Query Cache (0ms Latency)"]
-    Proxy["Vercel Serverless Proxy (/api/chat)"]
-    Env["Vercel Encrypted Environment Variables (GROQ_API_KEY)"]
+    User["Citizen Browser / Mobile Device"]
+    Cache["In-Memory LRU Response Cache (0ms Latency)"]
+    Proxy["Vercel Serverless Function (/api/chat)"]
+    Env["Encrypted Environment Variables (GROQ_API_KEY)"]
     Groq["Groq Cloud Inference (openai/gpt-oss-20b)"]
-    GovPortals["Official Gov Portals (NALSA 15100 / State Bar Councils)"]
+    LegalAid["Official Government Portals (NALSA / Bar Councils)"]
 
-    User -->|"1. Checks repeat query"| Cache
-    Cache --"Cache Hit"--> User
+    User -->|"1. Checks query cache"| Cache
+    Cache --"Cache Hit (0 tokens)"--> User
     Cache --"Cache Miss"--> Proxy
     Proxy -->|"2. Authenticates server-side"| Env
-    Env -->|"3. Authorized API payload"| Groq
+    Env -->|"3. Authorized API call"| Groq
     Groq -->|"4. Returns legal synthesis"| Proxy
     Proxy -->|"5. Sanitized response"| User
-    User -.->|"6. Direct referral"| GovPortals
+    User -.->|"6. Direct referral"| LegalAid
 ```
 
 ---
 
-## Core Capabilities
+## Engineering, Security & Performance Standards
 
-### 💬 NyAI Conversational Assistant
-A specialized legal conversational agent powered by Groq. Citizens can ask questions about:
-- Fundamental Rights under Part III of the Constitution (Articles 14, 19, 21, 32)
-- Bharatiya Nyaya Sanhita (BNS) & Indian Penal Code (IPC) equivalents
-- Bail provisions, arrest procedures (CrPC / BNSS), and rights in custody
-- Consumer disputes, tenant-landlord agreements, and employment rights
-
-### 🌐 Multilingual By Default
-Legal rights must speak your language. Better Call natively processes and outputs legal guidance in:
-- **Hindi** (हिन्दी)
-- **Tamil** (தமிழ்)
-- **Telugu** (తెలుగు)
-- **Bengali** (বাংলা)
-- **Marathi** (मराठी)
-- **Gujarati** (ગુજરાતી)
-- **Kannada** (ಕನ್ನಡ)
-- **Malayalam** (മലയാളം)
-- **English**
-
-### 📄 Document Simplifier
-Demystify agreements, employment contracts, and legal notices:
-- **Plain-English / Regional Summary:** Explains the agreement in simple words.
-- **Obligations & Duties:** Clear checklist of what you are agreeing to do.
-- **Retained Rights:** What protections you keep.
-- **Red Flag Detector:** Pinpoints unfair indemnity clauses, unilateral termination rights, and predatory terms.
-
-### 🔍 Contract Analyser & Comparison
-- Audit an individual agreement for missing clauses and liability traps.
-- Compare two competing contracts side-by-side with an objective Risk Score (**Low / Medium / High**) and actionable negotiation points.
-
-### 📋 Ready-to-Use Legal Templates
-Generate properly formatted drafts in minutes with guided placeholder brackets (`[NAME]`, `[DATE]`):
-- **RTI Applications** under the Right to Information Act, 2005
-- **FIR & Police Complaints** under relevant procedural codes
-- **Legal Notices** for unpaid salaries, security deposit recovery, or contract breach
-- **Affidavits & Consumer Forum Complaints**
-
-### 🤝 Verified Lawyer Directory & Free Legal Aid
-Better Call never acts as an unauthorized practitioner. Instead, it directly connects citizens with verified institutional aid:
-- **All 36 States & Union Territories:** Direct links to official State Bar Council registries to verify enrolled advocates.
-- **NALSA (National Legal Services Authority):** Instant routing to government-funded free legal aid (`15100`).
-- **Nyaya Bandhu:** Access to pro bono legal practitioners via the Department of Justice.
+* **Zero-Credential Frontend:** The client code and Git repository contain zero API keys. All calls are mediated by `/api/chat`.
+* **50 KB Payload Shield:** Serverless proxy enforces strict payload size limits to block Denial-of-Service attacks.
+* **Entity-Level XSS Sanitization:** `sanitizeAndFormat` escapes raw HTML entities before safe markdown parsing.
+* **HTTP Transport Security Headers:** Serves `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and strict `Referrer-Policy`.
+* **In-Memory LRU Query Cache:** Repeated questions resolve with zero network latency and zero model token cost.
+* **Modern CSS Efficiency:** Offscreen sections utilize `content-visibility: auto` to optimize rendering speed and eliminate layout shifts.
+* **WCAG 2.1 AAA Accessibility:** Screen reader ARIA live regions (`role="log"`), skip-to-content navigation, `:focus-visible` styling, and contrast mode compliance.
 
 ---
 
-## Engineering & Security Standards
+## Test Suite & Quality Assurance
 
-| Standard | Implementation |
-|---|---|
-| **Zero Client Credentials** | API keys are locked in Vercel serverless environment variables. Zero tokens in browser JS or Git history. |
-| **XSS Prevention** | Entity-level sanitization (`sanitizeAndFormat`) escapes all output before rendering. |
-| **Payload Defense** | Serverless function enforces a 50 KB request limit to prevent DoS attacks. |
-| **HTTP Security Headers** | `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Strict-Transport-Security: max-age=31536000`, `Referrer-Policy: strict-origin-when-cross-origin`. |
-| **Client-Side Rate Limiter** | 10 requests per minute sliding window prevents accidental spam. |
-| **LRU Response Caching** | Common queries are served from in-memory cache in 0ms with zero token cost. |
-| **WCAG 2.1 Accessibility** | Skip navigation, ARIA live regions (`role="log"`), `:focus-visible` styling, high-contrast support, and `prefers-reduced-motion` compliance. |
-
----
-
-## Test Suite & CI/CD
-
-The project features a 100% automated test suite powered by Jest and GitHub Actions:
+The codebase includes an extensive automated test suite covering utility functions, serverless API behaviors, legal data integrity, and multilingual script fidelity:
 
 ```bash
-# Run all unit tests
+# Run all unit and integration test suites
 npm test
 
-# Run tests with code coverage report
+# Run tests with code coverage analysis
 npm run test:coverage
+
+# Run static linter analysis
+npm run lint
 ```
 
-### Coverage Highlights:
-- **Statements:** 97.5%
-- **Functions:** 100%
-- **Branches:** 94.3%
-- **Test Count:** 57 passing tests covering XSS defense, rate limiting, token limits, serverless status codes, Groq error recovery, payload protection, and security headers.
+### Test Coverage Metrics:
+* **Total Passing Tests:** 70 tests across 3 suites (`tests/utils.test.js`, `tests/api.test.js`, `tests/legal.test.js`)
+* **Statement Coverage:** 97.5%
+* **Function Coverage:** 100%
+* **Static Analysis:** Clean ESLint pass with zero errors
 
 ---
 
-## Running Locally
+## Getting Started Locally
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/DeepRushil/better-call.git
    cd better-call
    ```
-2. Install test dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Run the test suite:
+3. Run the automated tests:
    ```bash
    npm test
    ```
-4. Open `index.html` directly in any browser, or serve with:
+4. Open `index.html` in any modern web browser, or serve with:
    ```bash
    npx serve .
    ```

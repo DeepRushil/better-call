@@ -1052,10 +1052,17 @@ textarea:focus-visible {
   .feature-card, .lawyer-card, .right-card { border-width: 2px; }
 }
 
-/* Scroll event passive hint via CSS contain */
+/* Modern CSS Rendering & Efficiency Optimizations */
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 .hero, .features, .chatbot-section, .tool-section,
 .lawyers-section, .rights-section {
   contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
 }
 
 /* ============================================================

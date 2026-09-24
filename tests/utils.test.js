@@ -101,7 +101,7 @@ describe("sanitizeAndFormat", () => {
   });
 
   test("escapes img onerror attack vector", () => {
-    const attack = '<img src=x onerror=alert(1)>';
+    const attack = "<img src=x onerror=alert(1)>";
     const result = sanitizeAndFormat(attack);
     expect(result).not.toContain("<img");
     expect(result).toContain("&lt;img");
